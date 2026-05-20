@@ -3,573 +3,855 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>オファー、見逃してない？ | GVA LINE Manager</title>
+  <title>インフルエンサー管理Bot | GOOD VIBES AGENCY</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    * {
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
       background: #fff;
       color: #111;
-      font-size: 16px;
-      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       padding-bottom: 80px;
     }
 
-    .container {
+    .page-wrapper {
       max-width: 460px;
       margin: 0 auto;
     }
 
-    /* Fade-in animation */
+    /* ===== FADE IN ===== */
     .fade-in {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(24px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.25s; }
+    .fade-in-delay-3 { transition-delay: 0.4s; }
+    .fade-in-delay-4 { transition-delay: 0.55s; }
+    .fade-in-delay-5 { transition-delay: 0.7s; }
+
+    /* ===== SECTION BASE ===== */
+    section {
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    section:nth-child(odd) { background: #F0FBF4; }
+    section:nth-child(even) { background: #fff; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #06C755;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Decorative background text */
+    .bg-text {
+      position: absolute;
+      font-size: 100px;
+      font-weight: 900;
+      color: #111;
+      opacity: 0.04;
+      top: 10px;
+      right: -10px;
+      line-height: 1;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 0;
+    }
+
+    .section-inner {
+      position: relative;
+      z-index: 1;
+    }
 
     /* ===== HERO ===== */
-    .hero {
-      background: #F0FBF4;
-      padding: 60px 20px 50px;
+    #hero {
+      background: #F0FBF4 !important;
+      padding: 60px 24px 56px;
       text-align: center;
     }
-    .hero-emoji {
-      font-size: 72px;
-      display: block;
-      margin-bottom: 20px;
-      line-height: 1;
-    }
-    .hero h1 {
-      font-size: 42px;
-      font-weight: 900;
-      line-height: 1.2;
-      color: #111;
-      margin-bottom: 20px;
-      letter-spacing: -0.5px;
-    }
-    .hero-sub {
-      font-size: 17px;
-      color: #444;
-      line-height: 1.7;
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1.5px solid #06C755;
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #06C755;
       margin-bottom: 32px;
     }
-    .hero-btn {
-      display: inline-block;
+
+    .hero-lines {
+      margin-bottom: 28px;
+    }
+
+    .hero-line {
+      font-size: 27px;
+      font-weight: 900;
+      color: #111;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-line .accent {
+      color: #06C755;
+    }
+
+    .hero-release {
+      font-size: 20px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-line {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       background: #06C755;
       color: #fff;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
       padding: 16px 32px;
-      border-radius: 50px;
+      border-radius: 100px;
       text-decoration: none;
-      box-shadow: 0 4px 16px rgba(6, 199, 85, 0.35);
+      width: 100%;
+      max-width: 340px;
+      box-shadow: 0 4px 20px rgba(6, 199, 85, 0.35);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .hero-btn:active {
+    .btn-line:active {
       transform: scale(0.97);
-      box-shadow: 0 2px 8px rgba(6, 199, 85, 0.25);
+      box-shadow: 0 2px 10px rgba(6, 199, 85, 0.3);
+    }
+
+    .btn-line-white {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #fff;
+      color: #06C755;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      width: 100%;
+      max-width: 340px;
+      box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+      transition: transform 0.15s ease;
+    }
+    .btn-line-white:active {
+      transform: scale(0.97);
     }
 
     /* ===== EMPATHY SECTION ===== */
-    .empathy {
-      padding: 60px 20px;
-      background: #fff;
-    }
-    .section-title {
-      font-size: 24px;
-      font-weight: 900;
-      color: #111;
-      margin-bottom: 28px;
-      text-align: center;
-    }
-    .bubble-card {
-      background: #fff;
-      border: 2px solid #f0f0f0;
-      border-radius: 20px;
-      padding: 20px 22px;
-      margin-bottom: 14px;
-      font-size: 16px;
-      color: #333;
-      line-height: 1.6;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      position: relative;
-    }
-    .bubble-card::before {
-      content: '';
-      position: absolute;
-      left: 28px;
-      bottom: -12px;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 12px solid #f0f0f0;
-    }
-    .bubble-card::after {
-      content: '';
-      position: absolute;
-      left: 30px;
-      bottom: -9px;
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 10px solid #fff;
-    }
-    .bubble-card:last-child::before,
-    .bubble-card:last-child::after {
-      display: none;
-    }
-    .bubble-emoji {
+    #empathy h2 {
       font-size: 22px;
-      margin-right: 8px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .card-emoji {
+      font-size: 36px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .card-body {}
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 6px;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
     }
 
     /* ===== SOLUTION SECTION ===== */
-    .solution {
-      padding: 60px 20px;
-      background: #fafafa;
+    #solution h2 {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
     }
-    .ba-row {
-      display: flex;
-      align-items: stretch;
-      margin-bottom: 12px;
-      border-radius: 14px;
+
+    .ba-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
     }
+
     .ba-before {
-      flex: 1;
-      background: #f0f0f0;
-      padding: 14px 12px;
-      font-size: 14px;
-      color: #666;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .ba-arrow {
-      background: #e8e8e8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 6px;
-      color: #999;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-    .ba-after {
-      flex: 1;
-      background: #E8FAF0;
-      padding: 14px 12px;
-      font-size: 14px;
-      color: #06C755;
+      background: #f3f4f6;
+      padding: 16px 20px;
+      font-size: 15px;
       font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      color: #555;
+    }
+
+    .ba-arrow {
+      text-align: center;
+      font-size: 18px;
+      color: #06C755;
+      padding: 4px 0;
+      background: #fff;
+    }
+
+    .ba-after {
+      background: #06C755;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
     }
 
     /* ===== STEPS SECTION ===== */
-    .steps {
-      padding: 60px 20px;
-      background: #fff;
+    #steps h2 {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
     }
+
+    .steps-sub {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 32px;
+    }
+
+    .steps-list {
+      position: relative;
+      padding-left: 0;
+    }
+
     .step-item {
       display: flex;
+      gap: 20px;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 28px;
+      position: relative;
+      margin-bottom: 0;
     }
-    .step-num {
-      font-size: 48px;
-      font-weight: 900;
-      color: #06C755;
-      line-height: 1;
-      min-width: 52px;
-      text-align: center;
+
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
     }
-    .step-content {
-      padding-top: 4px;
-    }
-    .step-title {
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      background: #06C755;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
+      font-weight: 900;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-line {
+      width: 2px;
+      flex: 1;
+      min-height: 48px;
+      background: linear-gradient(to bottom, #06C755, #c8f0d9);
+      margin: 4px 0;
+    }
+
+    .step-right {
+      padding-top: 8px;
+      padding-bottom: 32px;
+    }
+
+    .step-item:last-child .step-right {
+      padding-bottom: 0;
+    }
+
+    .step-title {
+      font-size: 17px;
       font-weight: 700;
       color: #111;
       margin-bottom: 4px;
     }
+
     .step-time {
-      display: inline-block;
-      background: #F0FBF4;
+      font-size: 11px;
       color: #06C755;
-      font-size: 12px;
       font-weight: 700;
-      padding: 2px 10px;
-      border-radius: 20px;
-      margin-bottom: 6px;
-    }
-    .step-desc {
-      font-size: 14px;
-      color: #666;
-      line-height: 1.6;
-    }
-    .step-divider {
-      width: 2px;
-      height: 20px;
-      background: #e8e8e8;
-      margin: 0 0 8px 26px;
+      background: #E8FAF0;
+      padding: 2px 8px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 8px;
     }
 
-    /* ===== PRICING SECTION ===== */
-    .pricing {
-      padding: 60px 20px;
-      background: #fafafa;
+    .step-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
     }
+
+    .highlight-box {
+      background: #E8FAF0;
+      border-left: 4px solid #06C755;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-top: 24px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    /* ===== PRICING ===== */
+    #pricing h2 {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .pricing-sub {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
     .pricing-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      margin-top: 8px;
     }
-    .price-card {
-      background: #fff;
+
+    .pricing-card {
       border-radius: 20px;
-      padding: 22px 18px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 22px 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
-    .price-card.pro {
+
+    .pricing-card.free {
+      background: #fff;
+    }
+
+    .pricing-card.pro {
       background: #06C755;
       color: #fff;
     }
-    .price-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #999;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .price-card.pro .price-label {
-      color: rgba(255,255,255,0.75);
-    }
-    .price-amount {
-      font-size: 36px;
+
+    .pricing-plan-name {
+      font-size: 28px;
       font-weight: 900;
-      color: #111;
+      color: #bbb;
+      margin-bottom: 6px;
       line-height: 1;
+    }
+
+    .pricing-card.pro .pricing-plan-name {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .pricing-recommend {
+      display: inline-block;
+      background: #fff;
+      color: #06C755;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
       margin-bottom: 4px;
     }
-    .price-card.pro .price-amount {
+
+    .pricing-price {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    .pricing-card.pro .pricing-price {
       color: #fff;
     }
-    .price-sub {
-      font-size: 13px;
-      color: #aaa;
-      margin-bottom: 16px;
-    }
-    .price-card.pro .price-sub {
+
+    .pricing-trial {
+      font-size: 11px;
+      font-weight: 700;
       color: rgba(255,255,255,0.8);
+      margin-bottom: 16px;
+      display: block;
     }
-    .price-divider {
+
+    .pricing-divider {
       height: 1px;
-      background: #f0f0f0;
+      background: rgba(0,0,0,0.07);
       margin-bottom: 14px;
     }
-    .price-card.pro .price-divider {
-      background: rgba(255,255,255,0.3);
+
+    .pricing-card.pro .pricing-divider {
+      background: rgba(255,255,255,0.2);
     }
-    .price-feature {
-      font-size: 13px;
-      color: #444;
-      margin-bottom: 8px;
+
+    .pricing-features {
+      list-style: none;
+    }
+
+    .pricing-features li {
+      font-size: 12px;
+      color: #555;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       line-height: 1.4;
     }
-    .price-card.pro .price-feature {
-      color: rgba(255,255,255,0.95);
+
+    .pricing-card.pro .pricing-features li {
+      color: rgba(255,255,255,0.9);
     }
-    .free-trial-badge {
-      display: block;
-      background: rgba(255,255,255,0.25);
-      border-radius: 10px;
-      padding: 8px 10px;
-      font-size: 12px;
-      font-weight: 700;
+
+    .pricing-features li .check {
+      color: #06C755;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .pricing-card.pro .pricing-features li .check {
       color: #fff;
-      text-align: center;
-      margin-top: 12px;
+    }
+
+    .pricing-features li .dash {
+      color: #ccc;
+      flex-shrink: 0;
     }
 
     /* ===== FINAL CTA ===== */
-    .final-cta {
-      padding: 60px 20px;
-      background: #fff;
+    #final-cta {
+      background: #111 !important;
       text-align: center;
+      padding: 64px 24px 60px;
     }
-    .final-cta-text {
-      font-size: 28px;
+
+    #final-cta h2 {
+      font-size: 32px;
       font-weight: 900;
-      color: #111;
-      line-height: 1.4;
-      margin-bottom: 10px;
-    }
-    .final-cta-note {
-      font-size: 13px;
-      color: #999;
-      margin-bottom: 28px;
-    }
-    .cta-btn-large {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: #06C755;
       color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 20px 28px;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 6px 24px rgba(6, 199, 85, 0.4);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      line-height: 1.4;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
     }
-    .cta-btn-large:active {
-      transform: scale(0.97);
-      box-shadow: 0 3px 12px rgba(6, 199, 85, 0.25);
+
+    .final-sub {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.8;
+      margin-bottom: 32px;
     }
 
     /* ===== FOOTER ===== */
     footer {
-      padding: 24px 20px;
+      background: #fff;
       text-align: center;
+      padding: 24px 20px;
       font-size: 12px;
-      color: #bbb;
-      background: #fafafa;
+      color: #aaa;
     }
 
-    /* ===== FIXED CTA ===== */
-    .fixed-cta {
+    /* ===== FIXED CTA BAR ===== */
+    #fixed-cta {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
+      z-index: 999;
       background: #06C755;
-      color: #fff;
-      padding: 16px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 700;
-      z-index: 100;
-      box-shadow: 0 -2px 12px rgba(0,0,0,.15);
-      text-decoration: none;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: background 0.15s ease;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .fixed-cta:active {
-      background: #05b34d;
+
+    #fixed-cta.hidden {
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #fixed-cta a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    /* Misc */
+    .center { text-align: center; }
+    .mt-4 { margin-top: 16px; }
+    .mt-8 { margin-top: 32px; }
+
+    .line-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="container">
-      <span class="hero-emoji">📱</span>
-      <h1>オファー、<br>見逃してない？</h1>
-      <p class="hero-sub">LINEに追加するだけで、<br>全部勝手にやってくれます。</p>
-      <a href="https://line.me/R/ti/p/@102fuvbt" class="hero-btn">🟢 今すぐ無料で始める</a>
-    </div>
-  </section>
+<div class="page-wrapper">
 
-  <!-- ===== EMPATHY ===== -->
-  <section class="empathy">
-    <div class="container">
-      <h2 class="section-title fade-in">こんなこと、ない？😓</h2>
-
-      <div class="bubble-card fade-in">
-        <span class="bubble-emoji">😩</span>LINEのDMが多すぎて、オファーの返信を忘れてた…
-      </div>
-      <div class="bubble-card fade-in">
-        <span class="bubble-emoji">😰</span>締め切り、今日だったの？！やばい！
-      </div>
-      <div class="bubble-card fade-in">
-        <span class="bubble-emoji">🥺</span>請求書って何を書けばいいんだろ…
-      </div>
-      <div class="bubble-card fade-in" style="margin-bottom:0;">
-        <span class="bubble-emoji">😔</span>先月いくら稼いだかも、よくわかってない
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SOLUTION ===== -->
-  <section class="solution">
-    <div class="container">
-      <h2 class="section-title fade-in">追加するだけで、こう変わる ✨</h2>
+  <!-- ① HERO -->
+  <section id="hero">
+    <div class="bg-text">GVA</div>
+    <div class="section-inner">
 
       <div class="fade-in">
-        <div class="ba-row">
-          <div class="ba-before"><span>😩</span> オファーを見逃す</div>
-          <div class="ba-arrow">→</div>
-          <div class="ba-after"><span>📩</span> 届いたら即通知</div>
-        </div>
-        <div class="ba-row">
-          <div class="ba-before"><span>😰</span> 締め切りを忘れる</div>
-          <div class="ba-arrow">→</div>
-          <div class="ba-after"><span>⏰</span> 前日に自動で教えてくれる</div>
-        </div>
-        <div class="ba-row">
-          <div class="ba-before"><span>🥺</span> 請求書が作れない</div>
-          <div class="ba-arrow">→</div>
-          <div class="ba-after"><span>🧾</span> スマホで3分で完成</div>
-        </div>
-        <div class="ba-row" style="margin-bottom:0;">
-          <div class="ba-before"><span>😔</span> 収入がわからない</div>
-          <div class="ba-arrow">→</div>
-          <div class="ba-after"><span>📊</span> 毎月レポートが届く</div>
+        <div class="hero-badge">
+          🤖 インフルエンサーのための管理Bot
         </div>
       </div>
+
+      <div class="hero-lines">
+        <div class="hero-line fade-in fade-in-delay-1">「初稿、いつ<span class="accent">まで</span><span class="accent">だっけ？</span>」</div>
+        <div class="hero-line fade-in fade-in-delay-2">「請求書、送っ<span class="accent">たっけ？</span>」</div>
+        <div class="hero-line fade-in fade-in-delay-3">「先月、いくら稼い<span class="accent">だっけ？</span>」</div>
+      </div>
+
+      <p class="hero-release fade-in fade-in-delay-4">そのモヤモヤ、全部解決。</p>
+      <p class="hero-sub fade-in fade-in-delay-4">LINEに追加するだけで、全部勝手にやってくれます。</p>
+
+      <div class="center fade-in fade-in-delay-5">
+        <a href="https://line.me/R/ti/p/@102fuvbt" class="btn-line">
+          <span class="line-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </span>
+          📱 無料で追加する（30秒）
+        </a>
+      </div>
+
     </div>
   </section>
 
-  <!-- ===== STEPS ===== -->
-  <section class="steps">
-    <div class="container">
-      <h2 class="section-title fade-in">始め方、めちゃ簡単 👇</h2>
 
-      <div class="step-item fade-in">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <div class="step-title">友達追加する</div>
-          <span class="step-time">⏱ 1分</span>
-          <p class="step-desc">「高橋 徹 | GVA」をLINEで検索して友達追加するだけ！</p>
+  <!-- ② EMPATHY -->
+  <section id="empathy">
+    <div class="bg-text">あるある</div>
+    <div class="section-inner">
+
+      <h2 class="fade-in">インフルエンサーあるある、<br>全部当てはまってない？😭</h2>
+
+      <div class="card fade-in fade-in-delay-1">
+        <div class="card-emoji">😩</div>
+        <div class="card-body">
+          <div class="card-title">DM、多すぎて見てない</div>
+          <p class="card-text">クライアントからのオファーが、普通のメッセージに埋もれてそのまま...。気づいたら期限切れてた、なんてことも。</p>
         </div>
       </div>
-      <div class="step-divider"></div>
 
-      <div class="step-item fade-in">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <div class="step-title">情報を送る</div>
-          <span class="step-time">⏱ 3分</span>
-          <p class="step-desc">届いたフォームに口座とSNSを入力するだけ。むずかしくないよ！</p>
+      <div class="card fade-in fade-in-delay-2">
+        <div class="card-emoji">🤯</div>
+        <div class="card-body">
+          <div class="card-title">今日締め切りだったの？！</div>
+          <p class="card-text">3本同時進行してると、スケジュール管理が追いつかない。頭の中だけで覚えようとして失敗するやつ。</p>
         </div>
       </div>
-      <div class="step-divider"></div>
 
-      <div class="step-item fade-in" style="margin-bottom:0;">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <div class="step-title">グループに追加する</div>
-          <p class="step-desc">クライアントとのグループLINEにBotを招待したら、あとは全部おまかせ！</p>
+      <div class="card fade-in fade-in-delay-3">
+        <div class="card-emoji">😅</div>
+        <div class="card-body">
+          <div class="card-title">請求書の書き方、わからん</div>
+          <p class="card-text">毎回ゼロから調べて、金額合ってるか不安になって、送るまでに1時間かかる。これ、毎月。</p>
         </div>
       </div>
+
+      <div class="card fade-in fade-in-delay-4">
+        <div class="card-emoji">💸</div>
+        <div class="card-body">
+          <div class="card-title">先月いくら稼いだっけ？</div>
+          <p class="card-text">案件ごとに金額バラバラで、まとめてない。確定申告とかになったとき絶対しんどい。</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ===== PRICING ===== -->
-  <section class="pricing">
-    <div class="container">
-      <h2 class="section-title fade-in">料金は？💰</h2>
 
-      <div class="pricing-grid fade-in">
-        <!-- Free -->
-        <div class="price-card">
-          <div class="price-label">まず無料で</div>
-          <div class="price-amount">FREE</div>
-          <div class="price-sub">ずっと無料</div>
-          <div class="price-divider"></div>
-          <div class="price-feature">✅ グループ監視<br>（1クライアント）</div>
-          <div class="price-feature">✅ オファー管理</div>
-          <div class="price-feature">✅ 今日のタスク確認</div>
-          <div class="price-feature" style="color:#ccc;">❌ 自動リマインド</div>
-          <div class="price-feature" style="color:#ccc;">❌ 請求書</div>
-        </div>
+  <!-- ③ SOLUTION -->
+  <section id="solution">
+    <div class="bg-text">CHANGE</div>
+    <div class="section-inner">
 
-        <!-- Pro -->
-        <div class="price-card pro">
-          <div class="price-label">本格的に使うなら</div>
-          <div class="price-amount">¥1,980</div>
-          <div class="price-sub">/月（Pro）</div>
-          <div class="price-divider"></div>
-          <div class="price-feature">✅ 全部使い放題</div>
-          <div class="price-feature">✅ グループ無制限</div>
-          <div class="price-feature">✅ 自動リマインド</div>
-          <div class="price-feature">✅ 請求書ダッシュボード</div>
-          <div class="price-feature">✅ 毎月の収入レポート</div>
-          <span class="free-trial-badge">🎉 14日間無料で試せる</span>
-        </div>
+      <h2 class="fade-in">追加するだけで、<br>こう変わる ✨</h2>
+
+      <div class="ba-card fade-in fade-in-delay-1">
+        <div class="ba-before">😩 オファーを見逃す</div>
+        <div class="ba-arrow">▼</div>
+        <div class="ba-after">📩 届いたら即通知。見逃しゼロ</div>
       </div>
+
+      <div class="ba-card fade-in fade-in-delay-2">
+        <div class="ba-before">🤯 締め切りを忘れる</div>
+        <div class="ba-arrow">▼</div>
+        <div class="ba-after">⏰ 3日前・前日・当日に自動で教えてくれる</div>
+      </div>
+
+      <div class="ba-card fade-in fade-in-delay-3">
+        <div class="ba-before">😅 請求書が作れない</div>
+        <div class="ba-arrow">▼</div>
+        <div class="ba-after">🧾 スマホで3分。PDF送付まで完結</div>
+      </div>
+
+      <div class="ba-card fade-in fade-in-delay-4">
+        <div class="ba-before">💸 収入が把握できない</div>
+        <div class="ba-arrow">▼</div>
+        <div class="ba-after">📊 毎月1日に先月分のレポートが届く</div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ===== FINAL CTA ===== -->
-  <section class="final-cta">
-    <div class="container">
-      <div class="final-cta-text fade-in">
-        まずは<br>無料で試してみて 👇
+
+  <!-- ④ STEPS -->
+  <section id="steps">
+    <div class="bg-text">HOW TO</div>
+    <div class="section-inner">
+
+      <h2 class="fade-in">始め方、<br>めちゃ簡単 👇</h2>
+      <p class="steps-sub fade-in">アプリDL不要。インストール不要。</p>
+
+      <div class="steps-list">
+
+        <div class="step-item fade-in fade-in-delay-1">
+          <div class="step-left">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-right">
+            <div class="step-title">友達追加する</div>
+            <span class="step-time">⏱ 1分</span>
+            <p class="step-desc">「高橋 徹 | GVA」をLINEで検索して追加するだけ。</p>
+          </div>
+        </div>
+
+        <div class="step-item fade-in fade-in-delay-2">
+          <div class="step-left">
+            <div class="step-number">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-right">
+            <div class="step-title">情報を送る</div>
+            <span class="step-time">⏱ 3分</span>
+            <p class="step-desc">届いたフォームに名前・口座・SNSを入力して送信。請求書に自動反映される。</p>
+          </div>
+        </div>
+
+        <div class="step-item fade-in fade-in-delay-3">
+          <div class="step-left">
+            <div class="step-number">3</div>
+          </div>
+          <div class="step-right">
+            <div class="step-title">グループに追加する</div>
+            <p class="step-desc">クライアントとのLINEグループにBotを招待。あとは自動で全部やってくれる。</p>
+          </div>
+        </div>
+
       </div>
-      <p class="final-cta-note fade-in">クレカ不要・30秒で始まる</p>
-      <a href="https://line.me/R/ti/p/@102fuvbt" class="cta-btn-large fade-in">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
-        </svg>
-        LINEで無料追加する
-      </a>
+
+      <div class="highlight-box fade-in fade-in-delay-4">
+        ✅ これだけ。あとは全部勝手に動きます。
+      </div>
+
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+
+  <!-- ⑤ PRICING -->
+  <section id="pricing">
+    <div class="bg-text">PRICE</div>
+    <div class="section-inner">
+
+      <h2 class="fade-in">いくらかかるの？💰</h2>
+      <p class="pricing-sub fade-in">まずは無料で使えます</p>
+
+      <div class="pricing-grid fade-in fade-in-delay-1">
+
+        <div class="pricing-card free">
+          <div class="pricing-plan-name">FREE</div>
+          <div style="height:28px;"></div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="check">✅</span> 1クライアント監視</li>
+            <li><span class="check">✅</span> オファー管理</li>
+            <li><span class="check">✅</span> 今日のタスク確認</li>
+            <li><span class="dash">—</span> 自動リマインド</li>
+            <li><span class="dash">—</span> 請求書ダッシュボード</li>
+          </ul>
+        </div>
+
+        <div class="pricing-card pro">
+          <span class="pricing-recommend">おすすめ</span>
+          <div class="pricing-price">¥1,980<span style="font-size:12px;font-weight:400;">/月</span></div>
+          <span class="pricing-trial">14日間無料</span>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="check">✅</span> グループ無制限</li>
+            <li><span class="check">✅</span> 自動リマインド</li>
+            <li><span class="check">✅</span> 請求書ダッシュボード</li>
+            <li><span class="check">✅</span> 毎月レポート</li>
+            <li><span class="check">✅</span> 全部使い放題</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ⑥ FINAL CTA -->
+  <section id="final-cta">
+    <div class="section-inner">
+
+      <h2 class="fade-in">とりあえず、<br>無料で使ってみて。</h2>
+      <p class="final-sub fade-in fade-in-delay-1">クレジットカード不要。<br>LINEを開いて、30秒で始まる。</p>
+
+      <div class="center fade-in fade-in-delay-2">
+        <a href="https://line.me/R/ti/p/@102fuvbt" class="btn-line-white" id="final-cta-btn">
+          <span class="line-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </span>
+          LINEで無料追加する
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ⑦ FOOTER -->
   <footer>
-    <div class="container">
-      © 2026 GOOD VIBES AGENCY
-    </div>
+    <p>© 2026 GOOD VIBES AGENCY</p>
   </footer>
 
-  <!-- ===== FIXED CTA ===== -->
-  <a href="https://line.me/R/ti/p/@102fuvbt" class="fixed-cta">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
-    </svg>
+</div><!-- /page-wrapper -->
+
+
+<!-- FIXED CTA BAR -->
+<div id="fixed-cta">
+  <a href="https://line.me/R/ti/p/@102fuvbt">
+    <span class="line-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+    </span>
     📱 LINEで無料追加する
   </a>
+</div>
 
-  <script>
-    // IntersectionObserver for fade-in animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -30px 0px'
-    });
 
-    document.querySelectorAll('.fade-in').forEach((el) => {
-      observer.observe(el);
+<script>
+  // ===== INTERSECTION OBSERVER: FADE IN =====
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
     });
+  }, { threshold: 0.12 });
 
-    // Stagger animations for siblings
-    document.querySelectorAll('.empathy .fade-in, .steps .fade-in').forEach((el, i) => {
-      el.style.transitionDelay = (i * 0.08) + 's';
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Immediately show above-fold elements
+  document.querySelectorAll('#hero .fade-in').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 100);
+  });
+
+
+  // ===== FIXED CTA: HIDE WHEN FINAL CTA IS VISIBLE =====
+  const fixedCta = document.getElementById('fixed-cta');
+  const finalCta = document.getElementById('final-cta');
+
+  const ctaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        fixedCta.classList.add('hidden');
+      } else {
+        fixedCta.classList.remove('hidden');
+      }
     });
-  </script>
+  }, { threshold: 0.1 });
+
+  ctaObserver.observe(finalCta);
+</script>
 
 </body>
 </html>
