@@ -200,6 +200,35 @@ footer{background:#111;color:#555;text-align:center;padding:20px;font-size:12px}
 
 /* CTA fun deco */
 .cta-deco{font-size:48px;display:block;text-align:center;margin-bottom:16px;animation:float 3.5s ease-in-out infinite}
+
+/* Dashboard Mock */
+.dash-mock{background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,.12);overflow:hidden}
+.dash-header{background:#06C755;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.dash-logo{color:#fff;font-size:14px;font-weight:900}
+.dash-plan-badge{background:rgba(255,255,255,.25);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px}
+.dash-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
+.dash-stat{border-radius:12px;padding:10px 6px;text-align:center}
+.dash-stat.green{background:#E8F5E9}
+.dash-stat.blue{background:#E3F2FD}
+.dash-stat.orange{background:#FFF3E0}
+.dash-stat-num{font-size:12px;font-weight:900;color:#111;line-height:1.2}
+.dash-stat-lbl{font-size:9px;color:#666;margin-top:2px}
+.dash-section-title{padding:8px 12px 4px;font-size:12px;font-weight:900;color:#333;border-top:1px solid #f0f0f0}
+.dash-task{display:flex;align-items:center;gap:6px;padding:7px 12px;border-bottom:1px solid #f5f5f5;font-size:12px}
+.dash-task.urgent{background:#fff8f8}
+.dash-task-badge{white-space:nowrap;font-size:11px;flex-shrink:0}
+.dash-task-name{flex:1;font-weight:700;color:#333;font-size:12px}
+.dash-task-phase{font-size:10px;color:#06C755;background:#E8F5E9;padding:2px 6px;border-radius:100px;font-weight:700;white-space:nowrap}
+.dash-project-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 12px 12px}
+.dash-proj{background:#f9fafb;border-radius:12px;padding:10px}
+.dash-proj-name{font-size:11px;font-weight:900;color:#111;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-proj-amount{font-size:14px;font-weight:900;color:#06C755;margin-bottom:5px}
+.dash-proj-phase{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:#E8F5E9;color:#06C755}
+.dash-proj-phase.shooting{background:#FFF3E0;color:#e65100}
+.dash-feat{display:flex;align-items:flex-start;gap:12px;background:#fff;border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.dash-feat-icon{font-size:26px;flex-shrink:0;margin-top:2px}
+.dash-feat-title{font-size:14px;font-weight:900;margin-bottom:4px}
+.dash-feat-desc{font-size:12px;color:#666;line-height:1.65}
 </style>
 </head>
 <body>
@@ -349,13 +378,129 @@ footer{background:#111;color:#555;text-align:center;padding:20px;font-size:12px}
     <h2 style="font-size:22px;font-weight:900;line-height:1.4;margin-bottom:8px" class="fi">始め方、<br>めちゃ簡単 👇</h2>
     <p style="font-size:13px;color:#999;margin-bottom:28px" class="fi">アプリDL不要。インストール不要。</p>
     <div class="steps-wrap">
-    <div class="step fi"><div class="step-n">01</div><div class="step-c"><span class="step-badge">1分</span><div class="step-t">友達追加する</div><div class="step-d">「高橋 徹 | GVA」をLINEで検索して追加。それだけ。</div></div></div>
+    <div class="step fi"><div class="step-n">01</div><div class="step-c"><span class="step-badge">1分</span><div class="step-t">友達追加する</div><div class="step-d">「GVA Manager」をLINEで検索して追加。それだけ。</div></div></div>
     <div class="step fi"><div class="step-n">02</div><div class="step-c"><span class="step-badge">3分</span><div class="step-t">情報を送る</div><div class="step-d">届いたフォームに名前・口座・SNSを入力。請求書に自動反映される。</div></div></div>
     <div class="step fi"><div class="step-n">03</div><div class="step-c"><span class="step-badge">すぐ終わる</span><div class="step-t">グループに招待する</div><div class="step-d">クライアントとのLINEグループにBotを追加。あとは全部勝手に動く。</div></div></div>
     </div>
     <div class="step-hl fi">✅ これだけ。あとは全部勝手に動きます。</div>
   </div>
 </section>
+
+<!-- WELCOME MESSAGE -->
+<section class="sec">
+  <div class="w">
+    <p class="trust-lbl fi">WELCOME MESSAGE</p>
+    <h2 style="font-size:22px;font-weight:900;line-height:1.4;margin-bottom:8px;text-align:center" class="fi">追加したら、すぐ届く 💬</h2>
+    <p style="font-size:14px;color:#555;text-align:center;margin-bottom:24px;line-height:1.7" class="fi">友達追加した瞬間、Botが案内してくれます。</p>
+    <div class="line-chat-wrap fi">
+      <div class="line-chat-hd">
+        <div class="line-chat-hd-av">🤖</div>
+        <div>
+          <div class="line-chat-hd-name">GVA Manager</div>
+          <div class="line-chat-hd-sub">自動返信</div>
+        </div>
+      </div>
+      <div class="line-msgs">
+        <div class="line-row">
+          <div class="line-row-av">🤖</div>
+          <div class="line-msg-inner">
+            <div class="line-sender">GVA Manager</div>
+            <div class="line-bubble-txt">🤖 GVA Manager へようこそ！<br><br>インフルエンサーの案件管理を、全部おまかせください。<br><br>📝 まずは以下の手順でダッシュボードにログインして氏名を登録してください<br><br>① 下のメニュー「ダッシュボード」をタップ<br>② 下部の「LINEアプリでログイン」をタップ<br>③ 管理画面が開いたら「設定」へ<br>④「氏名 / 代表者名」を入力して保存<br><br>登録後は案件管理がすぐ始められます 🚀<br><br>操作方法は「ヘルプ」でご確認ください 😊</div>
+            <div class="line-meta">✓✓ 既読</div>
+          </div>
+          <div class="line-time">今</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<div class="wave" style="transform:scaleY(-1)"><svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:40px"><path d="M0 30 C360 60 1080 0 1440 30 L1440 60 L0 60 Z" fill="#F0FBF4"/></svg></div>
+<section class="sec bg-g">
+  <div class="w">
+    <p class="trust-lbl fi">DASHBOARD</p>
+    <h2 style="font-size:22px;font-weight:900;line-height:1.4;margin-bottom:8px;text-align:center" class="fi">管理画面で<br>全部見える 📊</h2>
+    <p style="font-size:14px;color:#555;text-align:center;margin-bottom:24px;line-height:1.7" class="fi">LINEで追加したらすぐ使えるWebダッシュボード。<br>ブラウザで開くだけ、アプリ不要。</p>
+
+    <div class="dash-mock fi">
+      <div class="dash-header">
+        <span class="dash-logo">🤖 GVA Manager</span>
+        <span class="dash-plan-badge">Pro</span>
+      </div>
+      <div class="dash-stats-row">
+        <div class="dash-stat green">
+          <div class="dash-stat-num">¥120,000</div>
+          <div class="dash-stat-lbl">今月確定収益</div>
+        </div>
+        <div class="dash-stat blue">
+          <div class="dash-stat-num">¥85,000</div>
+          <div class="dash-stat-lbl">見込み収益</div>
+        </div>
+        <div class="dash-stat orange">
+          <div class="dash-stat-num">¥50,000</div>
+          <div class="dash-stat-lbl">未入金合計</div>
+        </div>
+      </div>
+      <div class="dash-section-title">📅 今日のタスク</div>
+      <div class="dash-task urgent">
+        <span class="dash-task-badge">🔴 今日まで</span>
+        <span class="dash-task-name">〇〇ブランド 投稿</span>
+        <span class="dash-task-phase">投稿待ち</span>
+      </div>
+      <div class="dash-task">
+        <span class="dash-task-badge">🟠 明日まで</span>
+        <span class="dash-task-name">△△コスメ 撮影</span>
+        <span class="dash-task-phase shooting">撮影待ち</span>
+      </div>
+      <div class="dash-section-title">📋 進行中案件</div>
+      <div class="dash-project-row">
+        <div class="dash-proj">
+          <div class="dash-proj-name">〇〇ブランド</div>
+          <div class="dash-proj-amount">¥50,000</div>
+          <div class="dash-proj-phase">投稿待ち</div>
+        </div>
+        <div class="dash-proj">
+          <div class="dash-proj-name">△△コスメ</div>
+          <div class="dash-proj-amount">¥35,000</div>
+          <div class="dash-proj-phase shooting">撮影待ち</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="dash-feat fi">
+        <div class="dash-feat-icon">📋</div>
+        <div>
+          <div class="dash-feat-title">案件管理</div>
+          <div class="dash-feat-desc">交渉中→撮影→投稿→請求→入金まで全フェーズを自動追跡。期日が近づくとLINEに通知。</div>
+        </div>
+      </div>
+      <div class="dash-feat fi">
+        <div class="dash-feat-icon">📄</div>
+        <div>
+          <div class="dash-feat-title">請求書自動生成 <span style="background:#06C755;color:#fff;font-size:10px;padding:2px 6px;border-radius:100px;margin-left:4px;font-weight:700">Pro</span></div>
+          <div class="dash-feat-desc">登録した口座・SNS情報から請求書を自動作成。PDF出力もワンクリック。</div>
+        </div>
+      </div>
+      <div class="dash-feat fi">
+        <div class="dash-feat-icon">📅</div>
+        <div>
+          <div class="dash-feat-title">カレンダー管理</div>
+          <div class="dash-feat-desc">案件の投稿日・撮影日をカレンダーで一覧確認。ダブルブッキングを防止。</div>
+        </div>
+      </div>
+      <div class="dash-feat fi">
+        <div class="dash-feat-icon">📊</div>
+        <div>
+          <div class="dash-feat-title">収益レポート <span style="background:#06C755;color:#fff;font-size:10px;padding:2px 6px;border-radius:100px;margin-left:4px;font-weight:700">Pro</span></div>
+          <div class="dash-feat-desc">月別・ブランド別の収益を可視化。今月の確定収益と見込みを一目で把握。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:40px"><path d="M0 30 C360 60 1080 0 1440 30 L1440 60 L0 60 Z" fill="#fff"/></svg></div>
 
 <!-- PRICING -->
 <section class="sec">
